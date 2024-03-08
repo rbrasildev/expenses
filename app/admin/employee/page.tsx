@@ -6,7 +6,7 @@ interface EmployerProps {
     values: [];
 }
 
-export default function EmployeeForm(values: []) {
+export default function EmployeeForm() {
     const onFinish = (values: []) => {
 
         const data = values;
