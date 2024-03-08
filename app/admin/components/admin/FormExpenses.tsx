@@ -2,7 +2,11 @@
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { Form, Select, Modal, Button, notification, Input } from "antd";
 import { useState } from "react";
-type NotificationType = 'success' | 'info' | 'warning' | 'error';
+
+interface ExpensesProps {
+    values: [];
+}
+
 
 export default function FormExpenses() {
     const [open, setOpen] = useState(false);
@@ -12,7 +16,7 @@ export default function FormExpenses() {
         form.submit();
     };
 
-    const onFinish = (values) => {
+    const onFinish = (values : []) => {
         setOpen(false);
         const data = values;
         fetch('https://api-reaffle.vercel.app/expenses', {
