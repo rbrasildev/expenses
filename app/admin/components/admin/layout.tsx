@@ -1,7 +1,8 @@
 'use client'
 import React, { ReactNode, useState } from 'react';
 import {
-    DashboardFilled,
+    DashboardOutlined,
+    DollarCircleOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UserOutlined,
@@ -27,35 +28,42 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
     return (
         <Layout>
-            <Sider style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }} width={264} trigger={null} collapsible collapsedWidth={54} collapsed={collapsed}
+            <Sider style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }} width={200} trigger={null} collapsible collapsedWidth={54} collapsed={collapsed}
             >
                 <div className="demo-logo-vertical" />
                 <Menu
                     className='mt-16'
                     theme="dark"
                     mode="inline"
-                    defaultSelectedKeys={['1']}
 
                 >
                     <Menu.Item
-                        key={1}
-                        icon={<DashboardFilled />}
+                        key={'1'}
+                        icon={<DashboardOutlined />}
                     >
                         <Link href="/admin">Dashboard</Link>
                     </Menu.Item>
 
                     <Menu.Item
 
-                        key={2}
-                        icon={<UserOutlined />}
+                        key={'2'}
+                        icon={<DollarCircleOutlined />}
                     >
                         <Link href="/admin/expenses">Despesas</Link>
+                    </Menu.Item>
+
+                    <Menu.Item
+
+                        key={'3'}
+                        icon={<UserOutlined />}
+                    >
+                        <Link href="/admin/employee">Colaborador</Link>
                     </Menu.Item>
                 </Menu>
             </Sider>
 
             <Layout
-                style={!collapsed ? { marginLeft: 264 } : { marginLeft: 54 }}
+                style={!collapsed ? { marginLeft: 200 } : { marginLeft: 54 }}
             >
                 <Header className='flex items-center justify-between' style={{ padding: 0, background: colorBgContainer }}>
                     <Button
