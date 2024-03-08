@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -10,11 +10,13 @@ import {
 import { Layout, Menu, Button, theme, Switch, Collapse } from 'antd';
 
 const { Header, Sider, Content } = Layout;
+interface DashboardLayoutProps {
+    children: ReactNode;
+}
 
-
-const DashboardLayout: React.FC = ({ children }) => {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
     const [collapsed, setCollapsed] = useState(false);
-    // const [widthContent, setWidthContent] = useState(264)
+
 
     const {
         token: { colorBgContainer, borderRadiusLG, controlItemBgHover },
@@ -88,4 +90,3 @@ const DashboardLayout: React.FC = ({ children }) => {
     );
 };
 
-export default DashboardLayout;
