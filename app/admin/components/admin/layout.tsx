@@ -14,13 +14,15 @@ const { Header, Sider, Content } = Layout;
 
 const DashboardLayout: React.FC = ({ children }) => {
     const [collapsed, setCollapsed] = useState(false);
+    // const [widthContent, setWidthContent] = useState(264)
+
     const {
         token: { colorBgContainer, borderRadiusLG, controlItemBgHover },
     } = theme.useToken();
 
     return (
         <Layout>
-            <Sider style={{ height: '100vh' }} width={264} trigger={null} collapsible collapsedWidth={54} collapsed={collapsed}
+            <Sider style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }} width={264} trigger={null} collapsible collapsedWidth={54} collapsed={collapsed}
             >
                 <div className="demo-logo-vertical" />
                 <Menu
@@ -49,7 +51,9 @@ const DashboardLayout: React.FC = ({ children }) => {
                     ]}
                 />
             </Sider>
-            <Layout>
+            <Layout
+                style={!collapsed ? { marginLeft: 264 } : { marginLeft: 54 }}
+            >
                 <Header className='flex items-center justify-between' style={{ padding: 0, background: colorBgContainer }}>
                     <Button
                         type="text"
