@@ -1,11 +1,9 @@
 import { ReactNode } from "react"
 import DashboardLayout from "./components/admin/layout"
 
-interface DashboardLayoutProps {
-    children: ReactNode;
-}
 
-export default function Dashboard({ children }: DashboardLayoutProps) {
+
+export default function Dashboard() {
     return (
         <DashboardLayout>
             <h1>
