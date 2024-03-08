@@ -13,7 +13,7 @@ interface DataType {
     payment_value: number;
 }
 
-export async function NewTable({ children }) {
+export async function NewTable() {
 
     const data = await fetch("https://api-reaffle.vercel.app/expenses").then((response) => response.json());
 
