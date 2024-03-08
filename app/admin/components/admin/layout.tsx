@@ -1,15 +1,18 @@
 'use client'
 import React, { ReactNode, useState } from 'react';
 import {
+    DashboardFilled,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UploadOutlined,
     UserOutlined,
-    VideoCameraOutlined,
+
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Switch, Collapse } from 'antd';
+import { Layout, Menu, Button, theme, Switch } from 'antd';
+import Link from 'next/link';
+
 
 const { Header, Sider, Content } = Layout;
+const { Item } = Menu;
 interface DashboardLayoutProps {
     children: ReactNode;
 }
@@ -33,26 +36,24 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     mode="inline"
                     defaultSelectedKeys={['1']}
 
-                    items={[
-                        {
-                            key: '1',
-                            icon: <UserOutlined />,
-                            label: 'Dashboard',
+                >
+                    <Menu.Item
+                        key={1}
+                        icon={<DashboardFilled />}
+                    >
+                        <Link href="/admin">Dashboard</Link>
+                    </Menu.Item>
 
-                        },
-                        {
-                            key: '2',
-                            icon: <VideoCameraOutlined />,
-                            label: 'Expenses',
-                        },
-                        {
-                            key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'nav 3',
-                        },
-                    ]}
-                />
+                    <Menu.Item
+
+                        key={2}
+                        icon={<UserOutlined />}
+                    >
+                        <Link href="/admin/expenses">Despesas</Link>
+                    </Menu.Item>
+                </Menu>
             </Sider>
+
             <Layout
                 style={!collapsed ? { marginLeft: 264 } : { marginLeft: 54 }}
             >
@@ -86,7 +87,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     {children}
                 </Content>
             </Layout>
-        </Layout>
+        </Layout >
     );
 };
 
