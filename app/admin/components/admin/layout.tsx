@@ -8,7 +8,7 @@ import {
     UserOutlined,
 
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Switch } from 'antd';
+import { Layout, Menu, Button, theme, Switch, } from 'antd';
 import Link from 'next/link';
 
 
@@ -84,12 +84,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     />
                 </Header>
                 <Content
+                    // className='container mx-auto'
                     style={{
                         margin: '24px 16px',
                         padding: 24,
-                        minHeight: 280,
-                        background: colorBgContainer,
-                        borderRadius: borderRadiusLG,
+                        height:'90vh',
+                        // background: colorBgContainer,
+                        // borderRadius: borderRadiusLG,
                     }}
                 >
                     {children}

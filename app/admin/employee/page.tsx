@@ -1,15 +1,14 @@
 'use client'
 import React from 'react';
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button, notification, DatePicker, Card } from 'antd';
 import DashboardLayout from '../components/admin/layout';
+
 interface EmployerProps {
-    values: [];
+    data: [];
 }
 
 export default function EmployeeForm() {
-    const onFinish = (values: []) => {
-
-        const data = values;
+    const onFinish = (data: []) => {
 
         fetch('https://api-reaffle.vercel.app/api/employee', {
             method: 'POST',
@@ -22,7 +21,10 @@ export default function EmployeeForm() {
                 return response.json()
             })
             .then((response) => {
-                console.log(response)
+                notification.success({
+                    message: 'Successo',
+                    description: response.message
+                })
             })
 
             .catch((error) => console.error('Error:', error));
@@ -30,31 +32,34 @@ export default function EmployeeForm() {
 
     return (
         <DashboardLayout>
-            <Form onFinish={onFinish}>
-                <Form.Item label="Nome" name="first_name" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Sobrenome" name="last_name" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Telefone" name="phone">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Email" name="email" rules={[{ type: 'email' }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Data Admissão" name="admission" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Chave PIX" name="key_pix">
-                    <Input />
-                </Form.Item>
-                <Form.Item>
-                    <Button type="default" htmlType="submit">
-                        Salvar
-                    </Button>
-                </Form.Item>
-            </Form>
+            <Card title="Formulário cadastro de colaborador" bordered={true}>
+
+                <Form onFinish={onFinish}>
+                    <Form.Item label="Nome" name="first_name" rules={[{ required: true, message: 'O campo nome é obrigatório!' }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Sobrenome" name="last_name" rules={[{ required: true, message: "O campo sobrenome é obrigatório" }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Telefone" name="phone">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Email" name="email" rules={[{ type: 'email' }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Data Admissão" name="admission" rules={[{ required: true, message: 'O campo data de admissão é obrigatório' }]}>
+                        <DatePicker format="DD/MM/YYYY" />
+                    </Form.Item>
+                    <Form.Item label="Chave PIX" name="key_pix">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="default" htmlType="submit">
+                            Salvar
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Card>
         </DashboardLayout>
     );
 };
