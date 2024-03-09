@@ -37,6 +37,11 @@ export default async function Admin() {
             key: "description",
         },
         {
+            title: "Data",
+            dataIndex: "created_at",
+            key: "created_at",
+        },
+        {
             title: "Valor",
             dataIndex: "payment_value",
             key: "payment_value",
