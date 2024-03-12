@@ -16,7 +16,7 @@ export default function FormExpenses() {
         form.submit();
     };
 
-    const onFinish = (values : []) => {
+    const onFinish = (values: []) => {
         setOpen(false);
         const data = values;
         fetch('https://api-reaffle.vercel.app/expenses', {
@@ -26,8 +26,9 @@ export default function FormExpenses() {
             },
             body: JSON.stringify(data)
         })
-            .then((response) => { response.json() })
             .then((response) => {
+                response.json()
+                console.log(response)
                 notification.success({
                     message: 'Successo',
                     description: 'dados gravados com sucesso'
@@ -37,7 +38,7 @@ export default function FormExpenses() {
     }
     return (
         <>
-            <Button className="mb-4" onClick={() => setOpen(true)} icon={<PlusCircleOutlined />}>Novo</Button>
+            <Button className="mb-4" size="large" onClick={() => setOpen(true)} icon={<PlusCircleOutlined />}>Novo</Button>
             <Modal
                 title="New Expenses"
                 centered
@@ -45,6 +46,9 @@ export default function FormExpenses() {
                 onOk={handleOk}
                 onCancel={() => setOpen(false)}
                 width={480}
+                okButtonProps={{ style: { backgroundColor: 'green', color: 'white', border: 'none' } }}
+                okType="default"
+                okText="Salvar"
             >
                 <Form form={form} onFinish={onFinish}>
 
@@ -53,6 +57,7 @@ export default function FormExpenses() {
                         rules={[{ required: true, message: 'Por favor preencha esse campo!' }]}
                     >
                         <Select
+                            size="large"
                             defaultValue="Selecione uma cidade"
                             style={{ width: 'auto' }}
                             options={[
@@ -68,6 +73,7 @@ export default function FormExpenses() {
                         rules={[{ required: true, message: 'Por favor preencha esse campo!' }]}
                     >
                         <Select
+                            size="large"
                             defaultValue="Selecione a pessoa"
                             options={[
                                 { value: 'Raimundo', label: 'Raimundo' },
@@ -83,6 +89,7 @@ export default function FormExpenses() {
                         rules={[{ required: true, message: 'Por favor preencha esse campo!' }]}
                     >
                         <Select
+                            size="large"
                             className="w-full"
                             defaultValue="Tipo da despesa"
                             options={[
@@ -101,6 +108,7 @@ export default function FormExpenses() {
                         rules={[{ required: true, message: 'Por favor preencha esse campo!' }]}
                     >
                         <Select
+                            size="large"
                             className="w-full"
                             defaultValue="Tipo de pagamento"
                             options={[
@@ -117,6 +125,7 @@ export default function FormExpenses() {
                         rules={[{ required: true, message: 'Por favor preencha esse campo!' }]}
                     >
                         <Input
+                            size="large"
                             placeholder="Descrição"
                         />
                     </Form.Item>
@@ -126,6 +135,7 @@ export default function FormExpenses() {
                         rules={[{ required: true, message: 'Por favor preencha esse campo!' }]}
                     >
                         <Input
+                            size="large"
                             placeholder="Valor"
                         />
                     </Form.Item>

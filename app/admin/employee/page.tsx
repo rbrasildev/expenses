@@ -50,7 +50,7 @@ export default async function Employee() {
     return (
         <DashboardLayout>
             <Link href="/admin/employee/create">
-                <Button>Novo</Button>
+                <Button size="large"  className="mb-3">Novo</Button>
             </Link>
             <Card title="Colaraboradores">
                 <Table dataSource={data} columns={columns} />;

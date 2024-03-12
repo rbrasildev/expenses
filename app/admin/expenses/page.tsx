@@ -40,6 +40,8 @@ export default async function Admin() {
             title: "Data",
             dataIndex: "created_at",
             key: "created_at",
+           
+
         },
         {
             title: "Valor",

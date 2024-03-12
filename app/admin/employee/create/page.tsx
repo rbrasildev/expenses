@@ -40,28 +40,27 @@ export default function EmployeeForm() {
     return (
         <DashboardLayout>
             <Card title="Formulário cadastro de colaborador" bordered={true}>
-
                 <Form onFinish={onFinish}>
                     <Form.Item label="Nome" name="first_name" rules={[{ required: true, message: 'O campo nome é obrigatório!' }]}>
-                        <Input />
+                        <Input size='large' />
                     </Form.Item>
                     <Form.Item label="Sobrenome" name="last_name" rules={[{ required: true, message: "O campo sobrenome é obrigatório" }]}>
-                        <Input />
+                        <Input size='large' />
                     </Form.Item>
                     <Form.Item label="Telefone" name="phone">
-                        <Input />
+                        <Input size='large' />
                     </Form.Item>
                     <Form.Item label="Email" name="email" rules={[{ type: 'email' }]}>
-                        <Input />
+                        <Input size='large' />
                     </Form.Item>
                     <Form.Item label="Data Admissão" name="admission" rules={[{ required: true, message: 'O campo data de admissão é obrigatório' }]}>
-                        <DatePicker format="DD/MM/YYYY" />
+                        <DatePicker size='large' format="DD/MM/YYYY" />
                     </Form.Item>
                     <Form.Item label="Chave PIX" name="key_pix">
-                        <Input />
+                        <Input size='large' />
                     </Form.Item>
                     <Form.Item>
-                        <Button type="default" htmlType="submit">
+                        <Button size='large' type="default" htmlType="submit">
                             Salvar
                         </Button>
                     </Form.Item>

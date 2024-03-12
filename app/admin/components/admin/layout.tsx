@@ -5,11 +5,14 @@ import {
     DollarCircleOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    UploadOutlined,
     UserOutlined,
+    VideoCameraOutlined,
 
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Switch, } from 'antd';
+import { Layout, Menu, Button, theme, Switch } from 'antd';
 import Link from 'next/link';
+import { Footer } from 'antd/es/layout/layout';
 
 
 const { Header, Sider, Content } = Layout;
@@ -23,47 +26,56 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
 
     const {
-        token: { colorBgContainer, borderRadiusLG, controlItemBgHover },
+        token: { colorBgContainer, borderRadiusLG, controlItemBgHover, },
     } = theme.useToken();
+
+    const icons = [UserOutlined, VideoCameraOutlined, UploadOutlined]
+
+    // const items = icons.map((icon, index) => ({
+    //     key: String(index + 1),
+    //     icon: React.createElement(icon),
+    //     label: `Nav ${index + 4}`
+    // }))
+
+    const items = [
+        {
+            key: 1,
+            icon: <DashboardOutlined />,
+            label: "Dashboard",
+            route: "/admin"
+        },
+        {
+            key: 2,
+            icon: <MenuFoldOutlined />,
+            label: "Despesas",
+            route: "/admin/expenses"
+        }
+    ]
 
     return (
         <Layout>
-            <Sider style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }} width={200} trigger={null} collapsible collapsedWidth={54} collapsed={collapsed}
+            <Sider
+                className="h-100"
+                trigger={null}
+                collapsible
+                width={254}
+                // collapsedWidth={54}
+                collapsed={collapsed}
+                breakpoint="sm"
+                onBreakpoint={(broken) => {
+                    setCollapsed(true)
+                }}
+
             >
-                <div className="demo-logo-vertical" />
-                <Menu
-                    className='mt-16'
-                    theme="dark"
-                    mode="inline"
+                <div className="m-3 flex justify-center">
+                    <img width={100} src="https://redeconexaonet.com.br/images/cidade-logomarca.png" />
+                </div>
 
-                >
-                    <Menu.Item
-                        key={'1'}
-                        icon={<DashboardOutlined />}
-                    >
-                        <Link href="/admin">Dashboard</Link>
-                    </Menu.Item>
-
-                    <Menu.Item
-
-                        key={'2'}
-                        icon={<DollarCircleOutlined />}
-                    >
-                        <Link href="/admin/expenses">Despesas</Link>
-                    </Menu.Item>
-
-                    <Menu.Item
-
-                        key={'3'}
-                        icon={<UserOutlined />}
-                    >
-                        <Link href="/admin/employee">Colaborador</Link>
-                    </Menu.Item>
-                </Menu>
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
             </Sider>
 
             <Layout
-                style={!collapsed ? { marginLeft: 200 } : { marginLeft: 54 }}
+            // style={!collapsed ? { marginLeft: 200 } : { marginLeft: 54 }}
             >
                 <Header className='flex items-center justify-between' style={{ padding: 0, background: colorBgContainer }}>
                     <Button
@@ -84,17 +96,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     />
                 </Header>
                 <Content
-                    // className='container mx-auto'
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        height:'90vh',
-                        // background: colorBgContainer,
-                        // borderRadius: borderRadiusLG,
-                    }}
+                    className='container p-4 mx-auto h-screen'
+
                 >
                     {children}
                 </Content>
+                <Footer style={{ textAlign: 'center' }}>
+                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                </Footer>
             </Layout>
         </Layout >
     );
