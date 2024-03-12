@@ -1,25 +1,20 @@
 'use client'
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import {
-    DashboardFilled,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    UploadOutlined,
     UserOutlined,
-
+    VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Switch } from 'antd';
-import Link from 'next/link';
-
+import { Layout, Menu, Button, theme, Switch, Collapse } from 'antd';
 
 const { Header, Sider, Content } = Layout;
-const { Item } = Menu;
-interface DashboardLayoutProps {
-    children: ReactNode;
-}
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+
+const DashboardLayout: React.FC = ({ children }) => {
     const [collapsed, setCollapsed] = useState(false);
-
+    // const [widthContent, setWidthContent] = useState(264)
 
     const {
         token: { colorBgContainer, borderRadiusLG, controlItemBgHover },
@@ -36,24 +31,26 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     mode="inline"
                     defaultSelectedKeys={['1']}
 
-                >
-                    <Menu.Item
-                        key={1}
-                        icon={<DashboardFilled />}
-                    >
-                        <Link href="/admin">Dashboard</Link>
-                    </Menu.Item>
+                    items={[
+                        {
+                            key: '1',
+                            icon: <UserOutlined />,
+                            label: 'Dashboard',
 
-                    <Menu.Item
-
-                        key={2}
-                        icon={<UserOutlined />}
-                    >
-                        <Link href="/admin/expenses">Despesas</Link>
-                    </Menu.Item>
-                </Menu>
+                        },
+                        {
+                            key: '2',
+                            icon: <VideoCameraOutlined />,
+                            label: 'Expenses',
+                        },
+                        {
+                            key: '3',
+                            icon: <UploadOutlined />,
+                            label: 'nav 3',
+                        },
+                    ]}
+                />
             </Sider>
-
             <Layout
                 style={!collapsed ? { marginLeft: 264 } : { marginLeft: 54 }}
             >
@@ -87,7 +84,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     {children}
                 </Content>
             </Layout>
-        </Layout >
+        </Layout>
     );
 };
 
+export default DashboardLayout;
