@@ -1,6 +1,6 @@
 'use client'
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { Form, Select, Modal, Button, notification, Input } from "antd";
+import { Form, Select, Modal, Button, notification, Input, Divider } from "antd";
 import { useState } from "react";
 
 interface ExpensesProps {
@@ -50,6 +50,7 @@ export default function FormExpenses() {
                 okType="default"
                 okText="Salvar"
             >
+                <Divider/>
                 <Form form={form} onFinish={onFinish}>
 
                     <Form.Item

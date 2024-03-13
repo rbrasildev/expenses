@@ -40,13 +40,17 @@ export default async function Admin() {
             title: "Data",
             dataIndex: "created_at",
             key: "created_at",
-           
+
 
         },
         {
             title: "Valor",
             dataIndex: "payment_value",
             key: "payment_value",
+        },
+        {
+            title: 'Ação',
+            key: 'action',
         }
     ];
 
@@ -54,7 +58,7 @@ export default async function Admin() {
     return (
         <DashboardLayout>
             <FormExpenses />
-            <Table dataSource={data} columns={columns} />;
+            <Table tableLayout="fixed" dataSource={data} columns={columns} />;
         </DashboardLayout >
     )
 }

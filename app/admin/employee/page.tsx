@@ -14,6 +14,7 @@ interface EmployeeProps {
 
 export default async function Employee() {
     const data = await fetch('https://api-reaffle.vercel.app/api/employee').then((response) => response.json())
+
     const columns = [
         {
             title: "Nome",
@@ -50,10 +51,10 @@ export default async function Employee() {
     return (
         <DashboardLayout>
             <Link href="/admin/employee/create">
-                <Button size="large"  className="mb-3">Novo</Button>
+                <Button size="large" className="mb-3">Novo</Button>
             </Link>
             <Card title="Colaraboradores">
-                <Table dataSource={data} columns={columns} />;
+                <Table tableLayout="fixed" dataSource={data} columns={columns} />;
             </Card>
         </DashboardLayout>
     )
