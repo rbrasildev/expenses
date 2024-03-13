@@ -1,58 +1,77 @@
 'use client'
-import React, { useState } from 'react';
+import { ReactNode, useState } from 'react';
+import { Layout, Menu, Button, theme, Switch, Space } from 'antd';
+import { } from 'antd/es/layout/layout';
+import MenuItem from 'antd/es/menu/MenuItem';
+import Link from 'next/link';
+
 import {
+    DashboardOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Switch, Collapse } from 'antd';
-
-const { Header, Sider, Content } = Layout;
 
 
-const DashboardLayout: React.FC = ({ children }) => {
+const { Header, Sider, Content, Footer } = Layout;
+
+interface Props {
+    children: ReactNode
+}
+
+const DashboardLayout = ({ children }: Props) => {
     const [collapsed, setCollapsed] = useState(false);
-    // const [widthContent, setWidthContent] = useState(264)
+    const [isTheme, setIsTheme] = useState(true)
 
     const {
-        token: { colorBgContainer, borderRadiusLG, controlItemBgHover },
+        token: { colorBgContainer, borderRadiusLG, controlItemBgHover, },
     } = theme.useToken();
+
+    const items = [
+        {
+            key: 1,
+            icon: <DashboardOutlined />,
+            label: "Dashboard",
+            route: "/admin"
+        },
+        {
+            key: 2,
+            icon: <MenuFoldOutlined />,
+            label: "Despesas",
+            route: "/admin/expenses"
+        },
+        {
+            key: 3,
+            icon: <UserOutlined />,
+            label: "Funcionários",
+            route: "/admin/employee"
+        }
+    ]
 
     return (
         <Layout>
-            <Sider style={{ position: 'fixed', top: 0, left: 0, bottom: 0 }} width={264} trigger={null} collapsible collapsedWidth={54} collapsed={collapsed}
+            <Sider
+                theme={isTheme ? 'dark' : 'light'}
+                className="h-100"
+                trigger={null}
+                collapsible
+                width={200}
+                collapsed={collapsed}
+                breakpoint="lg"
+                onBreakpoint={(broken) => {
+                    setCollapsed(true)
+                }}
+
             >
-                <div className="demo-logo-vertical" />
-                <Menu
-                    className='mt-16'
-                    theme="dark"
-                    mode="inline"
-                    defaultSelectedKeys={['1']}
-
-                    items={[
-                        {
-                            key: '1',
-                            icon: <UserOutlined />,
-                            label: 'Dashboard',
-
-                        },
-                        {
-                            key: '2',
-                            icon: <VideoCameraOutlined />,
-                            label: 'Expenses',
-                        },
-                        {
-                            key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'nav 3',
-                        },
-                    ]}
-                />
+                <div className="m-3 flex justify-center">
+                    <img width={100} src="https://redeconexaonet.com.br/images/cidade-logomarca.png" />
+                </div>
+                <Menu theme={isTheme ? 'dark' : 'light'} mode="inline" defaultSelectedKeys={['1']} items={items} />
             </Sider>
             <Layout
-                style={!collapsed ? { marginLeft: 264 } : { marginLeft: 54 }}
+
             >
                 <Header className='flex items-center justify-between' style={{ padding: 0, background: colorBgContainer }}>
                     <Button
@@ -65,24 +84,31 @@ const DashboardLayout: React.FC = ({ children }) => {
                             height: 64,
                         }}
                     />
+
+                    <Menu defaultSelectedKeys={['1']}>
+                        <Space>
+                            {items.map((item) =>
+                                <Link href={item.route}>
+                                    <MenuItem icon={item.icon}>{item.label}</MenuItem>
+                                </Link>
+                            )}
+                        </Space>
+                    </Menu>
                     <Switch
-                        // checked={theme === 'dark'}
-                        // onChange={changeTheme}
+                        checked={isTheme === true}
+                        onChange={setIsTheme}
                         checkedChildren="Dark"
                         unCheckedChildren="Light"
                     />
                 </Header>
-                <Content
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
-                        background: colorBgContainer,
-                        borderRadius: borderRadiusLG,
-                    }}
-                >
-                    {children}
+                <Content>
+                    <div className='container p-4 mx-auto h-screen' >
+                        {children}
+                    </div>
                 </Content>
+                <Footer style={{ textAlign: 'center' }}>
+                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                </Footer>
             </Layout>
         </Layout>
     );
