@@ -88,7 +88,7 @@ const DashboardLayout = ({ children }: Props) => {
                     <Menu defaultSelectedKeys={['1']}>
                         <Space>
                             {items.map((item) =>
-                                <Link href={item.route}>
+                                <Link key={item.route} href={item.route}>
                                     <MenuItem icon={item.icon}>{item.label}</MenuItem>
                                 </Link>
                             )}
@@ -107,7 +107,7 @@ const DashboardLayout = ({ children }: Props) => {
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    Ant Design ©{new Date().getFullYear()} Created by rbrasildev
                 </Footer>
             </Layout>
         </Layout>

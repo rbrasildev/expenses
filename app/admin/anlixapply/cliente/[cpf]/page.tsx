@@ -54,8 +54,8 @@ export default function Cliente({ params: { cpf } }: ClienteProps) {
     };
 
     useEffect(() => {
-        callGetApi();
-    }, [macAddress]);
+        callGetApi()
+    }, []);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
