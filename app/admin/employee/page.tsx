@@ -1,6 +1,8 @@
-import { Button, Card, Table } from "antd";
+import { Button, Card, Space, Table } from "antd";
 import DashboardLayout from "../components/admin/layout";
 import Link from "next/link";
+import { ReactNode } from "react";
+
 
 interface EmployeeProps {
     employee_id: number
@@ -10,9 +12,11 @@ interface EmployeeProps {
     email: string;
     admission: Date;
     key_pix: string;
+    children: ReactNode;
+    record: number;
 }
 
-export default async function Employee() {
+export default async function Employee({ children }: EmployeeProps) {
     const data = await fetch('https://api-reaffle.vercel.app/api/employee').then((response) => response.json())
 
     const columns = [
@@ -54,7 +58,7 @@ export default async function Employee() {
                 <Button size="large" className="mb-3">Novo</Button>
             </Link>
             <Card title="Colaraboradores">
-                <Table tableLayout="fixed" dataSource={data} columns={columns} />;
+                <Table tableLayout="fixed" size="middle" dataSource={data} columns={columns} />
             </Card>
         </DashboardLayout>
     )

@@ -50,7 +50,7 @@ export default function FormExpenses() {
                 okType="default"
                 okText="Salvar"
             >
-                <Divider/>
+                <Divider />
                 <Form form={form} onFinish={onFinish}>
 
                     <Form.Item

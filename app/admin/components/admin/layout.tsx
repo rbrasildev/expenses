@@ -1,41 +1,33 @@
 'use client'
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
+import { Layout, Menu, Button, theme, Switch, Space } from 'antd';
+import { } from 'antd/es/layout/layout';
+import MenuItem from 'antd/es/menu/MenuItem';
+import Link from 'next/link';
+
 import {
     DashboardOutlined,
-    DollarCircleOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
-
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Switch } from 'antd';
-import Link from 'next/link';
-import { Footer } from 'antd/es/layout/layout';
 
 
-const { Header, Sider, Content } = Layout;
-const { Item } = Menu;
-interface DashboardLayoutProps {
-    children: ReactNode;
+const { Header, Sider, Content, Footer } = Layout;
+
+interface Props {
+    children: ReactNode
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+const DashboardLayout = ({ children }: Props) => {
     const [collapsed, setCollapsed] = useState(false);
-
+    const [isTheme, setIsTheme] = useState(true)
 
     const {
         token: { colorBgContainer, borderRadiusLG, controlItemBgHover, },
     } = theme.useToken();
-
-    const icons = [UserOutlined, VideoCameraOutlined, UploadOutlined]
-
-    // const items = icons.map((icon, index) => ({
-    //     key: String(index + 1),
-    //     icon: React.createElement(icon),
-    //     label: `Nav ${index + 4}`
-    // }))
 
     const items = [
         {
@@ -49,19 +41,25 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             icon: <MenuFoldOutlined />,
             label: "Despesas",
             route: "/admin/expenses"
+        },
+        {
+            key: 3,
+            icon: <UserOutlined />,
+            label: "Funcionários",
+            route: "/admin/employee"
         }
     ]
 
     return (
         <Layout>
             <Sider
+                theme={isTheme ? 'dark' : 'light'}
                 className="h-100"
                 trigger={null}
                 collapsible
-                width={254}
-                // collapsedWidth={54}
+                width={200}
                 collapsed={collapsed}
-                breakpoint="sm"
+                breakpoint="lg"
                 onBreakpoint={(broken) => {
                     setCollapsed(true)
                 }}
@@ -70,12 +68,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <div className="m-3 flex justify-center">
                     <img width={100} src="https://redeconexaonet.com.br/images/cidade-logomarca.png" />
                 </div>
-
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
+                <Menu theme={isTheme ? 'dark' : 'light'} mode="inline" defaultSelectedKeys={['1']} items={items} />
             </Sider>
-
             <Layout
-            // style={!collapsed ? { marginLeft: 200 } : { marginLeft: 54 }}
+
             >
                 <Header className='flex items-center justify-between' style={{ padding: 0, background: colorBgContainer }}>
                     <Button
@@ -88,24 +84,34 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                             height: 64,
                         }}
                     />
+
+                    <Menu defaultSelectedKeys={['1']}>
+                        <Space>
+                            {items.map((item) =>
+                                <Link href={item.route}>
+                                    <MenuItem icon={item.icon}>{item.label}</MenuItem>
+                                </Link>
+                            )}
+                        </Space>
+                    </Menu>
                     <Switch
-                        // checked={theme === 'dark'}
-                        // onChange={changeTheme}
+                        checked={isTheme === true}
+                        onChange={setIsTheme}
                         checkedChildren="Dark"
                         unCheckedChildren="Light"
                     />
                 </Header>
-                <Content
-                    className='container p-4 mx-auto h-screen'
-
-                >
-                    {children}
+                <Content>
+                    <div className='container p-4 mx-auto h-screen' >
+                        {children}
+                    </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
                     Ant Design ©{new Date().getFullYear()} Created by Ant UED
                 </Footer>
             </Layout>
-        </Layout >
+        </Layout>
     );
 };
 
+export default DashboardLayout;
