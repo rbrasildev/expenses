@@ -1,24 +1,23 @@
-import { Button, Card, Space, Table } from "antd";
+import { Button, Card, Table } from "antd";
 import DashboardLayout from "../components/admin/layout";
 import Link from "next/link";
-import { ReactNode } from "react";
-
+import { GetServerSideProps } from "next";
 
 interface EmployeeProps {
-    employee_id: number
+    employee_id: number;
     first_name: string;
     last_name: string;
     phone: string;
     email: string;
     admission: Date;
     key_pix: string;
-    children: ReactNode;
-    record: number;
 }
 
-const Employee = async ({ children }: EmployeeProps) => {
-    const data = await fetch('https://api-reaffle.vercel.app/api/employee').then((response) => response.json())
+interface EmployeePageProps {
+    data: EmployeeProps[];
+}
 
+const Employee = ({ data }: EmployeePageProps) => {
     const columns = [
         {
             title: "Nome",
@@ -57,10 +56,21 @@ const Employee = async ({ children }: EmployeeProps) => {
             <Link href="/admin/employee/create">
                 <Button size="large" className="mb-3">Novo</Button>
             </Link>
-            <Card title="Colaraboradores">
-                <Table tableLayout="fixed" size="middle" dataSource={data} columns={columns} />
+            <Card title="Colaboradores">
+                <Table tableLayout="fixed" size="middle" dataSource={data} columns={columns} rowKey="employee_id" />
             </Card>
         </DashboardLayout>
     )
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const res = await fetch('https://api-reaffle.vercel.app/api/employee');
+    const data = await res.json();
+    return {
+        props: {
+            data,
+        },
+    };
+};
+
 export default Employee;
