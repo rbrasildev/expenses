@@ -16,7 +16,7 @@ interface EmployeeProps {
     record: number;
 }
 
-export default async function Employee({ children }: EmployeeProps) {
+const Employee = async ({ children }: EmployeeProps) => {
     const data = await fetch('https://api-reaffle.vercel.app/api/employee').then((response) => response.json())
 
     const columns = [
@@ -63,3 +63,4 @@ export default async function Employee({ children }: EmployeeProps) {
         </DashboardLayout>
     )
 }
+export default Employee;
