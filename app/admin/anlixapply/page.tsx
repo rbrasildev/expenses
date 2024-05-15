@@ -11,7 +11,7 @@ const Anlixapply: React.FC = () => {
     const callGetApi = async () => {
         setIsLoading(true)
         try {
-            const response = await fetch(`http://170.245.175.14:9595/api/api.php?login=${pppoe}`).then((response) => response.json())
+            const response = await fetch(`https://170.245.175.14:9595/api/api.php?login=${pppoe}`).then((response) => response.json())
             if (!response) {
                 alert('não encontramos nada com esse negócio')
                 setIsLoading(false)

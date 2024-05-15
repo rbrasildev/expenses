@@ -40,7 +40,7 @@ const Cliente = () => {
     const callGetApi = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch(`http://170.245.175.14:9595/api/api.php?login=${cpf}`).then((res) => res.json());
+            const response = await fetch(`https://170.245.175.14:9595/api/api.php?login=${cpf}`).then((res) => res.json());
             if (!response) {
                 alert('Não encontramos nada com esse negócio');
             } else {
