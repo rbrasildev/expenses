@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, FormEvent, ChangeEvent } from "react";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { LuSearch, LuWifi } from "react-icons/lu";
 import Link from "next/link";
 import DashboardLayout from "@/app/admin/components/admin/layout";
@@ -19,7 +19,8 @@ interface ClienteProps {
 
 const Cliente = () => {
     const router = useRouter();
-    const { cpf } = router.query as { cpf: string };
+
+    const cpf = 'xilito';
     const [isLoading, setIsLoading] = useState(false);
     const [dataSgp, setDataSgp] = useState<Partial<ClienteProps>>({});
     const [macAddress, setMacAddress] = useState('');
