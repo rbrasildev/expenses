@@ -1,15 +1,13 @@
 'use client';
 
 import { useEffect, useState, FormEvent, ChangeEvent } from "react";
+import { useRouter } from 'next/router';
 import { LuSearch, LuWifi } from "react-icons/lu";
 import Link from "next/link";
 import DashboardLayout from "@/app/admin/components/admin/layout";
 
 interface ClienteProps {
     cpf: string;
-    params: {
-        cpf: string;
-    };
     login?: string;
     nome?: string;
     mac_address?: string;
@@ -17,10 +15,11 @@ interface ClienteProps {
     wifi_password?: string;
     wifi_ssid_5?: string;
     wifi_password_5?: string;
-
 }
 
-export default function Cliente({ params: { cpf } }: ClienteProps) {
+const Cliente = () => {
+    const router = useRouter();
+    const { cpf } = router.query as { cpf: string };
     const [isLoading, setIsLoading] = useState(false);
     const [dataSgp, setDataSgp] = useState<Partial<ClienteProps>>({});
     const [macAddress, setMacAddress] = useState('');
@@ -54,8 +53,10 @@ export default function Cliente({ params: { cpf } }: ClienteProps) {
     };
 
     useEffect(() => {
-        callGetApi()
-    }, []);
+        if (cpf) {
+            callGetApi();
+        }
+    }, [cpf]);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -71,7 +72,7 @@ export default function Cliente({ params: { cpf } }: ClienteProps) {
                 <form method="post" action="/config" onSubmit={handleSubmit} className="w-1/2 p-1">
                     <header className="flex justify-between py-4 gap-10 items-center">
                         <span>Buscar MAC (resetdefault)</span>
-                        <button className="p-2 px-10 bg-lime-500 rounded-md">
+                        <button type="submit" className="p-2 px-10 bg-lime-500 rounded-md">
                             <LuSearch />
                         </button>
                     </header>
@@ -158,4 +159,6 @@ export default function Cliente({ params: { cpf } }: ClienteProps) {
             </main>
         </DashboardLayout>
     );
-}
+};
+
+export default Cliente;
