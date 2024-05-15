@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useEffect } from "react";
+import DashboardLayout from "../../components/admin/layout";
 
 interface SearchParams {
     mac_address: string;
@@ -50,7 +51,7 @@ export default function Config({ searchParams }: ConfigProps) {
     }, [searchParams]);
 
     return (
-        <div className="flex justify-center">
+        <DashboardLayout>        <div className="flex justify-center">
             <div className="flex flex-col gap-10">
                 <div className="flex flex-col">
                     <h1 className="font-bold text-2xl">Informações da CPE</h1>
@@ -66,5 +67,6 @@ export default function Config({ searchParams }: ConfigProps) {
                 <button onClick={callPostApi}>Aplicar</button>
             </div>
         </div>
+        </DashboardLayout>
     );
 }

@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import DashboardLayout from '../components/admin/layout';
 
 
 const Anlixapply: React.FC = () => {
@@ -29,22 +30,23 @@ const Anlixapply: React.FC = () => {
     }
 
     return (
-
-        <main className='bg-gradient-to-r from-dark-500 to-slate-500  flex h-screen  items-center flex-col justify-center'>
-            <form onSubmit={handleSubmit}>
-                <div className='w-96'>
-                    <input
-                        className='bg-zinc-300/10 p-4 rounded-tl-md rounded-bl-md outline-none'
-                        placeholder='Digite pppoe do cliente'
-                        type="text"
-                        name="pppoe"
-                        id="pppoe"
-                        value={pppoe}
-                        onChange={(e) => setPppoe(e.target.value)} />
-                    <input type="submit" value={isLoading ? 'carregando' : 'Buscar'} className='bg-lime-700 p-4 rounded-tr-md rounded-br-md hover:bg-lime-700/50 transition-all cursor-pointer' />
-                </div>
-            </form>
-        </main>
+        <DashboardLayout>
+            <main className='bg-gradient-to-r from-dark-500 to-slate-500  flex h-screen  items-center flex-col justify-center'>
+                <form onSubmit={handleSubmit}>
+                    <div className='w-96'>
+                        <input
+                            className='bg-zinc-300/10 p-4 rounded-tl-md rounded-bl-md outline-none'
+                            placeholder='Digite pppoe do cliente'
+                            type="text"
+                            name="pppoe"
+                            id="pppoe"
+                            value={pppoe}
+                            onChange={(e) => setPppoe(e.target.value)} />
+                        <input type="submit" value={isLoading ? 'carregando' : 'Buscar'} className='bg-lime-700 p-4 rounded-tr-md rounded-br-md hover:bg-lime-700/50 transition-all cursor-pointer' />
+                    </div>
+                </form>
+            </main>
+        </DashboardLayout>
     )
 }
 
